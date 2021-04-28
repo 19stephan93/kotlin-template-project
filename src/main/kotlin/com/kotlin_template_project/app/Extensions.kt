@@ -1,4 +1,4 @@
-package com.kotlin_template_project.app.extensions
+package com.kotlin_template_project.app
 
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatterBuilder

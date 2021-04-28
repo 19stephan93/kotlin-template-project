@@ -1,9 +1,9 @@
-package com.kotlin_template_project.app.configs
+package com.kotlin_template_project.app.config
 
-import com.kotlin_template_project.app.entities.Article
-import com.kotlin_template_project.app.entities.User
-import com.kotlin_template_project.app.repositories.ArticleRepository
-import com.kotlin_template_project.app.repositories.UserRepository
+import com.kotlin_template_project.app.entity.ArticleEntity
+import com.kotlin_template_project.app.entity.UserEntity
+import com.kotlin_template_project.app.repository.ArticleRepository
+import com.kotlin_template_project.app.repository.UserRepository
 import org.springframework.boot.ApplicationRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -16,9 +16,9 @@ class AppConfiguration {
                             articleRepository: ArticleRepository
     ) = ApplicationRunner {
 
-        val smaldini = userRepository.save(User("smaldini", "Stéphane", "Maldini"))
+        val smaldini = userRepository.save(UserEntity("smaldini", "Stéphane", "Maldini"))
         articleRepository.save(
-            Article(
+            ArticleEntity(
             title = "Reactor Bismuth is out",
             headline = "Lorem ipsum",
             content = "dolor sit amet",
@@ -26,7 +26,7 @@ class AppConfiguration {
         )
         )
         articleRepository.save(
-            Article(
+            ArticleEntity(
             title = "Reactor Aluminium has landed",
             headline = "Lorem ipsum",
             content = "dolor sit amet",

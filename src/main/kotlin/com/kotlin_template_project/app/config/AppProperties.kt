@@ -1,4 +1,4 @@
-package com.kotlin_template_project.app.configs
+package com.kotlin_template_project.app.config
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.ConstructorBinding

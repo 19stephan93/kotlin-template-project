@@ -1,6 +1,6 @@
 package com.kotlin_template_project.app
 
-import com.kotlin_template_project.app.configs.AppProperties
+import com.kotlin_template_project.app.config.AppProperties
 import org.springframework.boot.Banner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.EnableConfigurationProperties
