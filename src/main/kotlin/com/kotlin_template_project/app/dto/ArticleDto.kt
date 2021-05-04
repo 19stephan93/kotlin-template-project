@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 import java.util.*
 
-class ArticleDto(
+data class ArticleDto(
     var id: UUID?,
     var title: String?,
     var headline: String?,
@@ -18,26 +18,34 @@ class ArticleDto(
 ) {
 
     companion object {
+        fun entityToDto(entity: ArticleEntity): ArticleDto {
+            return ArticleDto(
+                id = entity.id,
+                title = entity.title,
+                headline = entity.headline,
+                content = entity.content,
+                authorId = entity.author.id,
+                addedAt = entity.addedAt
+            )
+        }
+
         fun entitiesToDtos(entities: Iterable<ArticleEntity>): List<ArticleDto> {
-            return entities.map { ArticleDto(
-                id = it.id,
-                title = it.title,
-                headline = it.headline,
-                content = it.content,
-                authorId = it.author.id,
-                addedAt = it.addedAt
-            ) }
+            return entities.map { entityToDto(it) }
+        }
+
+        fun dtoToEntity(dto: ArticleDto): ArticleEntity {
+            return ArticleEntity(
+                id = dto.id,
+                title = dto.title,
+                headline = dto.headline,
+                content = dto.content,
+                author = UserEntity(id = dto.authorId),
+                addedAt = dto.addedAt
+            )
         }
 
         fun dtosToEntities(dtos: List<ArticleDto>): Iterable<ArticleEntity> {
-            return dtos.map { ArticleEntity(
-                id = it.id,
-                title = it.title,
-                headline = it.headline,
-                content = it.content,
-                author = UserEntity(id = it.authorId),
-                addedAt = it.addedAt
-            ) }
+            return dtos.map { dtoToEntity(it) }
         }
     }
 }

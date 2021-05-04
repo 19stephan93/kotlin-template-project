@@ -3,12 +3,10 @@ package com.kotlin_template_project.app.entity
 import org.hibernate.annotations.GenericGenerator
 import java.time.LocalDateTime
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.ManyToOne
+import javax.persistence.*
 
-@Entity
+@Entity(name = "articles")
+@Table(name = "articles")
 class ArticleEntity(
     var title: String?,
     var headline: String?,

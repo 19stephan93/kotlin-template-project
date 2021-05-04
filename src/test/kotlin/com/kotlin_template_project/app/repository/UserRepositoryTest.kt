@@ -8,16 +8,28 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
 
 @DataJpaTest
-class UserRepositoryTest  @Autowired constructor(
-    val entityManager: TestEntityManager,
-    val userRepository: UserRepository
-) {
+class UserRepositoryTest {
+    @Autowired
+    lateinit var entityManager: TestEntityManager
+
+    @Autowired
+    lateinit var userRepository: UserRepository
+
     @Test
-    fun `When findByLogin then return User`() {
-        val juergen = UserEntity("springjuergen", "Juergen", "Hoeller")
-        entityManager.persist(juergen)
+    fun `Find all test users`() {
+        val testUser1 = UserEntity("testUser1", "john", "grey")
+        val realUser = UserEntity("richard", "richard", "mcallen")
+        val testUser2 = UserEntity("testUser2", "alex", "petersburg")
+
+        entityManager.persist(testUser1)
+        entityManager.persist(realUser)
+        entityManager.persist(testUser2)
         entityManager.flush()
-        val user = userRepository.findById(juergen.id!!)
-        Assertions.assertThat(user.get()).isEqualTo(juergen)
+
+        val testUsers: List<UserEntity> = userRepository.findTestUsers().toList()
+
+        Assertions.assertThat(testUsers.size).isEqualTo(2)
+        Assertions.assertThat(testUsers[0]).isEqualTo(testUser1)
+        Assertions.assertThat(testUsers[1]).isEqualTo(testUser2)
     }
 }

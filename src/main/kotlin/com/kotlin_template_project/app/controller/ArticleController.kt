@@ -14,9 +14,9 @@ import java.util.*
 
 @RestController
 @RequestMapping("/api/article")
-class ArticleController @Autowired constructor(
-    val articleService: IArticleService<ArticleDto>
-) {
+class ArticleController {
+    @Autowired
+    lateinit var articleService: IArticleService<ArticleDto>
 
     @GetMapping("/")
     fun findAll() = articleService.findAll()

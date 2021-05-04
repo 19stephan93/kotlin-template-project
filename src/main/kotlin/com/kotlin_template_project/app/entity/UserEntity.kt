@@ -5,8 +5,10 @@ import java.util.*
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
+import javax.persistence.Table
 
-@Entity
+@Entity(name = "users")
+@Table(name = "users")
 class UserEntity(
     var username: String? = null,
     var firstname: String? = null,

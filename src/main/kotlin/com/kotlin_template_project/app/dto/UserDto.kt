@@ -3,7 +3,7 @@ package com.kotlin_template_project.app.dto
 import com.kotlin_template_project.app.entity.UserEntity
 import java.util.*
 
-class UserDto(
+data class UserDto(
     var id: UUID?,
     var username: String?,
     var firstname: String?,
@@ -12,24 +12,32 @@ class UserDto(
 ) {
 
     companion object {
-        fun entitiesToDtos(entities: Iterable<UserEntity>): List<UserDto> {
-            return entities.map { UserDto(
-                id = it.id,
-                username = it.username,
-                firstname = it.firstname,
-                lastname = it.lastname,
-                description = it.description
-            ) }
+        fun entityToDto(entity: UserEntity): UserDto {
+            return UserDto(
+                id = entity.id,
+                username = entity.username,
+                firstname = entity.firstname,
+                lastname = entity.lastname,
+                description = entity.description
+            )
         }
 
-        fun dtosToEntities(dtos: List<UserDto>): Iterable<UserEntity> {
-            return dtos.map { UserEntity(
-                id = it.id,
-                username = it.username,
-                firstname = it.firstname,
-                lastname = it.lastname,
-                description = it.description
-            ) }
+        fun entitiesToDtos(entities: Iterable<UserEntity>): Iterable<UserDto> {
+            return entities.map { entityToDto(it) }
+        }
+
+        fun dtoToEntity(dto: UserDto): UserEntity {
+            return UserEntity(
+                id = dto.id,
+                username = dto.username,
+                firstname = dto.firstname,
+                lastname = dto.lastname,
+                description = dto.description
+            )
+        }
+
+        fun dtosToEntities(dtos: Iterable<UserDto>): Iterable<UserEntity> {
+            return dtos.map { dtoToEntity(it) }
         }
     }
 }
