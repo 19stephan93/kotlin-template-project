@@ -1,0 +1,16 @@
+version: '3'
+services:
+  allure:
+    image: "frankescobar/allure-docker-service:2.13.8"
+    environment:
+      CHECK_RESULTS_EVERY_SECONDS: 5
+      KEEP_HISTORY: 1
+      KEEP_HISTORY_LATEST: 25
+      SECURITY_USER: "admin"
+      SECURITY_PASS: "admin"
+      SECURITY_ENABLED: 0
+    ports:
+      - "5050:5050"
+    volumes:
+      - /Users/stefanstan/projects/personal/kotlin-template-project/build/reports/allure-results:/app/projects/kotlin-template-project/results
+      - /Users/stefanstan/projects/personal/cucumber-kotlin-skeleton/build/reports/allure-results:/app/projects/cucumber-kotlin-skeleton/results
