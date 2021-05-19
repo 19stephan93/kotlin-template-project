@@ -32,11 +32,13 @@ jobs:
         run: ./gradlew unit-tests
 #      - name: Deploy
 #        run: some-deployment
-      - name: Run integration tests
-        run: ./gradlew integration-tests
-        env:
-          host: http://myawesomehost:8080/
-          hostHealthCheck: http://myawesomehost:8080/health/
+#      - name: Run integration tests
+#        run: ./gradlew integration-tests
+#        env:
+#          host: http://myawesomehost:8080/
+#          hostHealthCheck: http://myawesomehost:8080/health/
+#      - name: Push Integration tests results to Reporting APP
+#        run: ./scripts/upload-tests-results.sh ${{ secrets.REPORTING_TOOL_URL }} ${{ secrets.REPORTING_TOOL_USERNAME }} ${{ secrets.REPORTING_TOOL_PASSWORD }} "kotlin-template-project-${{ GITHUB_REF }}" >/dev/null 2>&1
       - name: Cleanup Gradle Cache
         # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
         # Restoring these files from a GitHub Actions cache might cause problems for future builds.

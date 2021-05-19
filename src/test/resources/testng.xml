@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Tests" parallel="none" thread-count="4">
-
-  <listeners>
-    <listener class-name="qa.example.support.AnnotationTransformer"/>
-  </listeners>
-
   <test name="API Integration Tests" verbose="1">
     <classes>
       <class name="com.kotlin_template_project.app.CucumberRunner"/>
-<!--      <class name="qa.example.CucumberRunner"/>-->
     </classes>
   </test>
 
