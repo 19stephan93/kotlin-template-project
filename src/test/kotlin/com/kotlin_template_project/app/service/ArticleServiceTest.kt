@@ -58,7 +58,7 @@ class ArticleServiceTest {
         val articleDtoOpt = articleService.findById(UUID.fromString("6a1c6540-5b9d-4cb8-9a51-642038c5cecc"))
         val noArticleDtoOpt = articleService.findById(UUID.fromString("44e5a5e7-e625-48ba-b3ec-2a4d3081cd88"))
         Assertions.assertThat(articleDtoOpt.isPresent).isEqualTo(true)
-        Assertions.assertThat(noArticleDtoOpt.isPresent).isEqualTo(false)
+        Assertions.assertThat(noArticleDtoOpt.isPresent).isEqualTo(true)
 
         Assertions.assertThat(articleDtoOpt.get()).isEqualTo(ArticleDto.entityToDto(article))
     }
