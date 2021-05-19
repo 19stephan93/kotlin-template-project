@@ -28,6 +28,15 @@ jobs:
             ${{ runner.os }}-gradle-
       - name: Build with Gradle
         run: ./gradlew build
+      - name: Run unit tests
+        run: ./gradlew unit-tests
+#      - name: Deploy
+#        run: some-deployment
+      - name: Run integration tests
+        run: ./gradlew integration-tests
+        env:
+          host: http://myawesomehost:8080/
+          hostHealthCheck: http://myawesomehost:8080/health/
       - name: Cleanup Gradle Cache
         # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
         # Restoring these files from a GitHub Actions cache might cause problems for future builds.
