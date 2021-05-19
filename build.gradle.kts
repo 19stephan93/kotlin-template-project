@@ -4,6 +4,8 @@ import de.undercouch.gradle.tasks.download.Verify
 import org.gradle.internal.impldep.org.apache.tools.zip.UnsupportedZipFeatureException
 import org.jetbrains.kotlin.gradle.dsl.Coroutines
 import org.jetbrains.kotlin.js.dce.InputResource
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
     id("org.springframework.boot") version "2.4.5"
@@ -27,6 +29,31 @@ allure {
 
 val unitTestTask = tasks.register<Test>("unit-tests") {
     useJUnitPlatform()
+    testLogging {
+        // set options for log level LIFECYCLE
+        events = mutableSetOf(TestLogEvent.FAILED,
+            TestLogEvent.PASSED,
+            TestLogEvent.SKIPPED,
+            TestLogEvent.STANDARD_OUT)
+
+        exceptionFormat = TestExceptionFormat.FULL
+        showExceptions = true
+        showCauses = true
+        showStackTraces = true
+
+        // set options for log level DEBUG and INFO
+        debug {
+            events = mutableSetOf(TestLogEvent.STARTED,
+                TestLogEvent.FAILED,
+                TestLogEvent.PASSED,
+                TestLogEvent.SKIPPED,
+                TestLogEvent.STANDARD_ERROR,
+                TestLogEvent.STANDARD_OUT)
+            exceptionFormat = TestExceptionFormat.FULL
+        }
+        info.events = debug.events
+        info.exceptionFormat = debug.exceptionFormat
+    }
 }
 
 val integrationTestTask = tasks.register<Test>("integration-tests") {
