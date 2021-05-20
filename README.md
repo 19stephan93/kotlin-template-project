@@ -22,6 +22,7 @@ docker ps
 ```
 In order to migrate the database schema run the following command:
 ```cmd
+cd ../..
 docker run --rm --network host -v ~/<PATH_TO_PROJECT>/kotlin-template-project/liquibase:/liquibase/changelog liquibase/liquibase:4.3.5 --defaultsFile=/liquibase/changelog/liquibase.docker.properties --changeLogFile=changelog.xml update
 ```
 The previous command starts the Liquibase Docker container from an existing Docker image on DockerHub `liquibase/liquibase:4.3.5` and migrates the database according to the `liquibase/changelog.xml` file.
