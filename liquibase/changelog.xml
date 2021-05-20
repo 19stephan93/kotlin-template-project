@@ -8,7 +8,7 @@
             <column name="title" type="VARCHAR">
                 <constraints nullable="true"/>
             </column>
-            <column name="headLine" type="VARCHAR">
+            <column name="headline" type="VARCHAR">
                 <constraints nullable="true"/>
             </column>
             <column name="content" type="VARCHAR">
@@ -23,16 +23,16 @@
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="users_pk"/>
             </column>
-            <column name="username" type="UUID">
+            <column name="username" type="VARCHAR">
                 <constraints nullable="true"/>
             </column>
-            <column name="firstname" type="UUID">
+            <column name="firstname" type="VARCHAR">
                 <constraints nullable="true"/>
             </column>
-            <column name="lastname" type="UUID">
+            <column name="lastname" type="VARCHAR">
                 <constraints nullable="true"/>
             </column>
-            <column name="description" type="UUID">
+            <column name="description" type="VARCHAR">
                 <constraints nullable="true"/>
             </column>
         </createTable>
