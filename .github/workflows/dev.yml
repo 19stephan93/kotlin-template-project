@@ -1,0 +1,51 @@
+name: Deploy - Dev
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 100 # rush change needs to have a reference to master branch.
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Cache Gradle packages
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Build with Gradle
+        run: ./gradlew build
+      - name: Run unit tests
+        run: ./gradlew unit-tests
+#      - name: Deploy
+#        run: some-deployment
+#      - name: Run integration tests
+#        run: ./gradlew integration-tests
+#        env:
+#          host: http://myawesomehost:8080/
+#          hostHealthCheck: http://myawesomehost:8080/health/
+#      - name: Push Integration tests results to Reporting APP
+#        run: ./scripts/upload-tests-results.sh ${{ secrets.REPORTING_TOOL_URL }} ${{ secrets.REPORTING_TOOL_USERNAME }} ${{ secrets.REPORTING_TOOL_PASSWORD }} "kotlin-template-project-${{ GITHUB_REF }}" >/dev/null 2>&1
+      - name: Cleanup Gradle Cache
+        # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
+        # Restoring these files from a GitHub Actions cache might cause problems for future builds.
+        run: |
+          rm -f ~/.gradle/caches/modules-2/modules-2.lock
+          rm -f ~/.gradle/caches/modules-2/gc.properties
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Package
+          path: build/libs

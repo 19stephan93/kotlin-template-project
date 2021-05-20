@@ -1,7 +1,10 @@
-gradlew
-gradlew.bat
-gradle
+#gradlew
+#gradlew.bat
+#gradle
 .gradle
 build/
 .idea
 .DS_Store
+
+chromedriver*
+geckodriver*

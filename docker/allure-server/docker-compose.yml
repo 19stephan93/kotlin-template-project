@@ -1,0 +1,19 @@
+version: '3'
+services:
+  allure:
+    image: "frankescobar/allure-docker-service:2.13.8"
+    environment:
+      CHECK_RESULTS_EVERY_SECONDS: "NONE"
+      KEEP_HISTORY: 1
+      KEEP_HISTORY_LATEST: 25
+      SECURITY_USER: "admin"
+      SECURITY_PASS: "admin"
+      SECURITY_ENABLED: 1
+      SECURITY_VIEWER_USER: "viewer"
+      SECURITY_VIEWER_PASS: "viewer"
+      ACCESS_TOKEN_EXPIRES_IN_MINS: 15
+      REFRESH_TOKEN_EXPIRES_IN_DAYS: 60
+      MAKE_VIEWER_ENDPOINTS_PUBLIC: 1
+      #      TLS: 1
+    ports:
+      - "5050:5050"
