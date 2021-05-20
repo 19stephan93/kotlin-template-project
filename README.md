@@ -12,16 +12,16 @@ This skeleton is using a Postgresql database that runs in a Docker container.
 The tool that is used for database migration is Liquibase. It uses a `changelog` file that lists the database changes in order.   
 
 To start the database, we use an existing Docker image from DockerHub - `postgres:13.2`:
-```cmd
+```
 cd docker/db
 docker-compose up -d
 ```
 Check if the container is running:
-```cmd
+```
 docker ps
 ```
 In order to migrate the database schema run the following command:
-```cmd
+```
 cd ../..
 docker run --rm --network host -v ~/<PATH_TO_PROJECT>/kotlin-template-project/liquibase:/liquibase/changelog liquibase/liquibase:4.3.5 --defaultsFile=/liquibase/changelog/liquibase.docker.properties --changeLogFile=changelog.xml update
 ```
@@ -32,13 +32,13 @@ The previous command starts the Liquibase Docker container from an existing Dock
 
 ### Unit testing
 Run unit tests:
-```cmd
+```
 gradle unit-tests
 ```
 
 ### Integration testing 
 Run integration testing (make sure that the application is running):
-```cmd
+```
 gradle integration-tests
 ```
 <a name="allure"></a>
