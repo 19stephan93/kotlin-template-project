@@ -15,7 +15,7 @@
                 <constraints nullable="true"/>
             </column>
             <column name="author_id" type="UUID"/>
-            <column name="addedAt" type="DATETIME"/>
+            <column name="added_at" type="DATETIME"/>
         </createTable>
     </changeSet>
     <changeSet author="developer" id="5079589590103-2">
