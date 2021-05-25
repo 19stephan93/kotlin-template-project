@@ -16,6 +16,7 @@ plugins {
     kotlin("kapt") version "1.5.0"
     id("io.qameta.allure") version "2.8.1"
     id("de.undercouch.download") version "4.1.1"
+    id("org.liquibase.gradle") version "2.0.4"
 }
 
 allure {
@@ -183,7 +184,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-    runtimeOnly("com.h2database:h2")
+    runtimeOnly("org.postgresql:postgresql")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(module = "junit")
@@ -228,6 +229,13 @@ dependencies {
 
     testImplementation("io.rest-assured:rest-assured:4.2.0")
     testImplementation("io.rest-assured:rest-assured-all:4.2.0")
+
+//    implementation("org.liquibase:liquibase-core:4.0.0")
+    liquibaseRuntime("org.liquibase:liquibase-core:4.0.0")
+
+    testImplementation("org.testcontainers:testcontainers:1.15.0")
+    testImplementation("org.testcontainers:junit-jupiter:1.15.0")
+    testImplementation("org.testcontainers:postgresql:1.15.0")
 }
 
 tasks.withType<KotlinCompile> {
